@@ -11,6 +11,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -20,4 +21,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "MaimaiHelper"
-include(":app")
+include(":client")
+include(":server")
