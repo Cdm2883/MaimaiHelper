@@ -1,11 +1,14 @@
 package vip.cdms.maimaihelper
 
 import io.ktor.server.application.*
+import io.ktor.server.plugins.autohead.*
 
 fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
 }
 
 fun Application.module() {
-    configureRouting()
+    QrCapture.init()
+    install(AutoHeadResponse)
+    helperRouting()
 }

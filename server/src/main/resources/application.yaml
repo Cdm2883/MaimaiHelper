@@ -4,3 +4,9 @@ ktor:
             - vip.cdms.maimaihelper.ApplicationKt.module
     deployment:
         port: 16643
+
+helper:
+    token: DO_NOT_USE_DEFAULT_TOKEN
+    desktop-switcher:
+        to: '0'
+        back: '-0'
