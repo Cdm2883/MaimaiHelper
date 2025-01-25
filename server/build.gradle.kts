@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-    mainClass.set("io.ktor.server.netty.EngineMain")
+    mainClass.set("vip.cdms.maimaihelper.ApplicationKt")
 }
 
 dependencies {
