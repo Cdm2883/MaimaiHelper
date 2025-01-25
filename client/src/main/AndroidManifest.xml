@@ -5,9 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@android:drawable/ic_menu_compass"
         android:label="MaimaiHelper"
         android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
