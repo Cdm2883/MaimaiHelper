@@ -1,4 +1,4 @@
-name: Build a preview version for server
+name: Build a preview version for client
 on:
   push:
     branches:
@@ -27,7 +27,9 @@ jobs:
           distribution: oracle
 
       - name: Build client
-        run: ./gradlew :client:assemblePreview
+        run: |
+          chmod +x ./gradlew
+          ./gradlew :client:assemblePreview
 
       - name: Upload unsigned apk
         uses: actions/upload-artifact@v4
