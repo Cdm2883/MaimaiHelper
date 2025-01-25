@@ -1,0 +1,29 @@
+name: Build a preview version for server
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: oracle
+
+      - name: Build server
+        run: ./gradlew :server:buildFatJar
+
+      - name: Upload fat jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: maimaihelper-server-${{ github.sha }}
+          path: server/build/libs/
