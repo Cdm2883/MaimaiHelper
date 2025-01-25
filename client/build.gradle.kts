@@ -17,8 +17,14 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        create("preview") {
+            initWith(getByName("release"))
+            versionNameSuffix = "-preview"
+            applicationIdSuffix = ".preview"
         }
     }
     compileOptions {

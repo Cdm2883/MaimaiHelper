@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'server/**'
+      - 'client/**'
       - 'gradle/**'
       - 'gradle.properties'
       - 'build.gradle.kts'
@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
 
       - name: Checkout main
@@ -25,11 +25,11 @@ jobs:
           java-version: 17
           distribution: oracle
 
-      - name: Build server
-        run: ./gradlew :server:buildFatJarCustom
+      - name: Build client
+        run: ./gradlew :client:assemblePreview
 
-      - name: Upload fat jar
+      - name: Upload unsigned apk
         uses: actions/upload-artifact@v4
         with:
-          name: maimaihelper-server-${{ github.sha }}
-          path: server/build/libs/
+          name: maimaihelper-client-${{ github.sha }}
+          path: client/build/outputs/apk/preview/
