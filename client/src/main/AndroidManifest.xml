@@ -8,7 +8,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@android:drawable/ic_menu_compass"
         android:label="MaimaiHelper"
         android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
         tools:targetApi="31">
