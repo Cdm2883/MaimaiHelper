@@ -1,4 +1,7 @@
 [versions]
+maimaihelper-name = "0.0.1-alpha"
+maimaihelper-code = "1"
+
 #noinspection AndroidGradlePluginVersion
 android-gradle-plugin = "8.6.0-alpha07"
 kotlin = "2.1.0"

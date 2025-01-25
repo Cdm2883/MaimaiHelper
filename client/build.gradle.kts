@@ -11,8 +11,8 @@ android {
         minSdk = 16
         //noinspection ExpiredTargetSdkVersion
         targetSdk = 27
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = libs.versions.maimaihelper.code.get().toInt()
+        versionName = libs.versions.maimaihelper.name.get()
     }
 
     buildTypes {

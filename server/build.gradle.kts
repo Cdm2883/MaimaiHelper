@@ -16,3 +16,13 @@ dependencies {
     implementation(libs.google.zxing.core)
     implementation(libs.google.zxing.javase)
 }
+
+tasks.register("buildFatJarCustom") {
+    dependsOn("buildFatJar")
+    doLast {
+        buildDir("libs/server-all.jar")
+            .renameTo(buildDir("libs/maimaihelper-server-$version.jar"))
+    }
+}
+
+fun buildDir(path: String) = layout.buildDirectory.file(path).get().asFile
