@@ -6,6 +6,8 @@
 
 > 帮您在只有基本联网安卓设备（如：手表、翻盖手机）的情况下也能轻松出勤！
 
+在服务端中获取二维码并将图片返回到客户端。部署文档请查看 [Github Wiki](https://github.com/SomeUtils/MaimaiHelper/wiki)。
+
 ## 🎈 开源
 项目采用 GNU Affero General Public License v3.0 开源，著作权归 [Cdm2883](https://github.com/Cdm2883) 所有。  
 更多信息请参阅 [LICENSE](LICENSE) 文件了解详情。
