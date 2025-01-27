@@ -21,12 +21,12 @@ fun Application.helperRouting() {
 
             val output = QrCapture.shot()
 
-            desktopSwitcher.switchBack()
-
             val outputStream = ByteArrayOutputStream()
             ImageIO.write(output, "png", outputStream)
             val outputBytes = outputStream.toByteArray()
             call.respondBytes(outputBytes, ContentType.Image.PNG)
+
+            desktopSwitcher.switchBack()
         }
     }
 }
