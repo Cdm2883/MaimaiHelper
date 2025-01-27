@@ -21,7 +21,7 @@ object QrCapture {
         delay(3000)
         frameCard.click()
         delay(1500)
-        val screenshot = frameQr.capture()
+        val screenshot = waitForQR(capture = { frameQr.capture() })
         frameClose.click()
         screenshot
     }

@@ -1,5 +1,10 @@
 package vip.cdms.maimaihelper
 
+import com.google.zxing.ReaderException
+import com.google.zxing.BinaryBitmap
+import com.google.zxing.qrcode.QRCodeReader
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource
+import com.google.zxing.common.HybridBinarizer
 import java.awt.Rectangle
 import java.awt.Robot
 import java.awt.event.MouseEvent
@@ -15,7 +20,7 @@ object ScreenRobot {
     fun delay(ms: Int) = Robot().delay(ms)
 
     @Suppress("DEPRECATION")
-    fun JFrame.click() = with(robot){
+    fun JFrame.click() = with(robot) {
         isVisible = false
         mouseMove(location.x, location.y)
         delay(100)
@@ -32,5 +37,36 @@ object ScreenRobot {
         val screenshot = robot.createScreenCapture(bound)
         isVisible = true
         return screenshot
+    }
+
+    fun BufferedImage.hasQRCode(): Boolean {
+        return try {
+            QRCodeReader().decode(
+                BinaryBitmap(
+                    HybridBinarizer(
+                        BufferedImageLuminanceSource(this)
+                    )
+                )
+            )
+            true
+        } catch (e: ReaderException) {
+            false
+        } catch (e: Throwable) {
+            false
+        }
+    }
+
+    fun waitForQR(
+        capture: () -> BufferedImage,
+        timeout: Long = 15000,
+        interval: Long = 300
+    ): BufferedImage {
+        val start = System.currentTimeMillis()
+        while (System.currentTimeMillis() - start < timeout) {
+            val img = capture()
+            if (img.hasQRCode()) return img
+            delay(interval.toInt())
+        }
+        throw RuntimeException("QR code not detected in ${timeout}ms")
     }
 }
