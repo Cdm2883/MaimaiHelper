@@ -21,8 +21,24 @@ object QrCapture {
         delay(3000)
         frameCard.click()
         delay(1500)
-        val screenshot = frameQr.capture()
+        val screenshot = waitForQr { frameQr.capture() }
         frameClose.click()
         screenshot
+    }
+
+    private fun ScreenRobot.waitForQr(
+        timeout: Int = 15000,
+        interval: Int = 300,
+        capture: () -> BufferedImage
+    ): BufferedImage {
+        val begin = System.currentTimeMillis()
+        lateinit var screenshot: BufferedImage
+        do {
+            screenshot = capture()
+            val refactored = QrRefactor.refactor(screenshot)
+            if (refactored != null) return refactored
+            delay(interval)
+        } while (System.currentTimeMillis() - begin <= timeout)
+        return screenshot
     }
 }

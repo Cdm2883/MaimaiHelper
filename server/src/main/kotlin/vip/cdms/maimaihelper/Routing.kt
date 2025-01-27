@@ -1,11 +1,9 @@
 package vip.cdms.maimaihelper
 
-import com.google.zxing.NotFoundException
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
 import javax.imageio.ImageIO
 
@@ -19,17 +17,9 @@ fun Application.helperRouting() {
             if (config.token != null && call.queryParameters["token"] != config.token)
                 return@get call.respondText("Invalid token", status = HttpStatusCode.Unauthorized)
 
-            lateinit var output: BufferedImage
-
             desktopSwitcher.switchTo()
 
-            val screenshot = QrCapture.shot()
-            try {
-                val content = QrRefactor.decode(screenshot)
-                output = QrRefactor.encode(content)
-            } catch (e: NotFoundException) {
-                output = screenshot
-            }
+            val output = QrCapture.shot()
 
             desktopSwitcher.switchBack()
 

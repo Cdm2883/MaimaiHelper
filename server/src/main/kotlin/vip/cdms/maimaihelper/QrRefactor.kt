@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage
 object QrRefactor {
     private const val SIZE = 300
 
-    fun decode(qr: BufferedImage): String {
+    private fun decode(qr: BufferedImage): String {
         val hints = mapOf(
             DecodeHintType.CHARACTER_SET to "UTF-8",
             DecodeHintType.TRY_HARDER to true,
@@ -23,7 +23,7 @@ object QrRefactor {
         return result.text
     }
 
-    fun encode(content: String): BufferedImage {
+    private fun encode(content: String): BufferedImage {
         val hints = mapOf(
             EncodeHintType.ERROR_CORRECTION to ErrorCorrectionLevel.M,
             EncodeHintType.QR_VERSION to 4,
@@ -33,5 +33,11 @@ object QrRefactor {
         val writer = MultiFormatWriter()
         val matrix = writer.encode(content, BarcodeFormat.QR_CODE, SIZE, SIZE, hints)
         return MatrixToImageWriter.toBufferedImage(matrix)
+    }
+
+    fun refactor(origin: BufferedImage) = try {
+        encode(decode(origin))
+    } catch (e: NotFoundException) {
+        null
     }
 }
